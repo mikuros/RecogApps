@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--ビューポートを設定 --><!-- user-scalable=noの追加も検討 -->
+  <title>{% block title %}RecogApps{% endblock %}</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet"><!--Orbitronフォント-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	{% block head %}{% endblock %}
+</head>
+<body>
+<header class="main-header">
+  <div class="logo">
+    <a href="{{ url_for('home') }}">RecogApps</a>
+  </div>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="{{ url_for('home') }}" id="only-pc">ホーム</a></li>
+      <li><a href="{{ url_for('mosaic.index') }}">モザイク</a></li>
+      <li><a href="{{ url_for('watermark.index') }}">電子透かし生成</a></li>
+      <li><a href="{{ url_for('watermark.detect') }}">電子透かし検出</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+
+</body>
+</html>

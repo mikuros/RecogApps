@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}透かし検出{% endblock %}
+
+{% block head %}
+	<!-- ==== 修正 START：static/js の参照を url_for() に変更 ==== -->
+  <script src="{{ url_for('static', filename='js/secure_watermark.js') }}" defer></script>
+  <!-- ==== 修正 END ==== -->
+{% endblock %}
+
+
+{% block content %}
+
+<h1>電子透かし検出</h1>
+<form id="form-detect-watermark" method="POST" enctype="multipart/form-data" action="{{ url_for('watermark.detect') }}">
+  <input type="file" name="image" accept=".jpg,.jpeg,.png" required>
+	<p class="annotation">対応ファイル形式：jpg/png</p>
+  <button type="submit">検出</button>
+</form>
+{% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% if message %}
+  <p style="color: blue;">{{ message | safe }}</p>
+{% endif %}
+
+{% endblock %}
+

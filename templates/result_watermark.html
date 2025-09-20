@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}結果{% endblock %}
+
+
+{% block content %}
+
+<h2>{{ message | safe }}</h2>
+
+<div class = "result-button">
+{% if img_url %}
+<img src="{{ img_url }}" width="300"><br>
+<a href="{{ img_url }}" download="{{ download_name }}" class="download-btn-watermark">画像をダウンロード</a>
+{% endif %}
+<br>
+<a href="{{ url_for('watermark.index') }}">トップに戻る</a>
+</div>
+{% endblock %}

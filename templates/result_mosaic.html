@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}モザイク画像ダウンロード{% endblock %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/main_mosaic.js') }}" defer></script><!--jsファイル読み込み-->
+{% endblock %}
+
+
+{% block content %}
+  <h1>モザイク調整</h1>
+
+  <!--ここ action="/mosaic/tmp2" とすると、通信がhttpになって「送信しようとしている情報は保護されません」と表示され、ファイルの送信ができなくなる。-->
+	<!-- <form id="send-mosaic2" method="POST" enctype="multipart/form-data" action="https://testptest.com/mosaic/tmp2"> -->
+	<!-- 上記のように書き換えればできるが、それよりFlask通すように統一すべき。url_for()ではPATH名ではなく、関数名を指定する。 -->
+	<form id="form-mosaic2" method="POST" enctype="multipart/form-data" action="{{ url_for('mosaic.index2') }}">		
+    	<label for="mosaic-level-input2">モザイク濃度を再調整</label>
+    	<input type="range" name="mosaic_level_input2" id="mosaic-level-input2" min="4" max="30" value="{{ mosaic_level_input2 }}">
+    	<div class="range-labels">
+  			<span>薄</span>
+				<span>濃</span>
+			</div>
+			<button type="submit">送信</button>
+  </form>
+
+	
+  {% if image_url %}
+    <!-- <h2>処理された画像</h2> -->
+    <a href="{{ image_url }}" download>画像をダウンロード</a>
+		<br>
+		<img src="{{ image_url }}" style="max-width: 60%;">    
+  {% endif %}
+
+	<a href="{{ url_for('mosaic.index') }}" class="btn">トップページに戻る</a>
+
+{% endblock %}

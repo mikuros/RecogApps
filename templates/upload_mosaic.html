@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}モザイク画像アップロード{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='js/main_mosaic.js') }}" defer></script><!--jsファイル読み込み-->
+{% endblock %}
+
+
+{% block content %}
+  <h1>モザイク</h1>
+
+	<!--ここ action="/mosaic" とすると、通信がhttpになって「送信しようとしている情報は保護されません」と表示され、ファイルの送信ができなくなる。-->
+  <form id="form-mosaic1" method="POST" enctype="multipart/form-data" action="{{ url_for('mosaic.index') }}">
+ 	  <label for="mosaic-level-input1">モザイク濃度を指定してください</label>
+    <input type="range" name="mosaic_level_input1" id="mosaic-level-input1" min="4" max="30" value="{{ mosaic_level_input1 }}">
+		<div class="range-labels">
+  		<span>薄</span>
+			<span>濃</span>
+		</div>
+		<input type="file" name="image" id="image" accept=".jpg,.jpeg,.png" required>
+		<p class="annotation">対応ファイル形式：jpg/png</p>
+		<button type="submit">送信</button>
+  </form>
+	
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+	{% for msg in get_flashed_messages() %}
+ 		<p style="color: red;">{{ msg }}</p>
+	{% endfor %}
+
+{% endblock %}
+

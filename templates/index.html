@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}トップページ{% endblock %}
+
+※jsの読み込み
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<!-- 各機能の軽い説明 -->
+<h1>RecogAppsへようこそ</h1>
+
+<div class="feature-grid">
+  <a href="{{ url_for('mosaic.index') }}" class="feature-card">
+    <h2>顔にモザイクをかける</h2>
+		<p>モザイクの濃さを自由に調節できます。</p>
+  </a>
+
+  <a href="{{ url_for('watermark.index') }}" class="feature-card">
+    <h2>電子透かしを埋め込む</h2>
+		<p>画像流出や改ざん防止に役立ちます。<br><br><u>※人の目には見えないため、画像の劣化を感じることはありません。</u></p>
+  </a>
+
+  <a href="{{ url_for('watermark.detect') }}" class="feature-card">
+    <h2>電子透かし付き画像を検出</h2>
+		<p>画像に紐づけた名前が表示され、流出元を特定できます。</p>
+  </a>
+</div>
+
+{% endblock %}

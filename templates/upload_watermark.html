@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}透かし生成{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='js/secure_watermark.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<h1>電子透かし画像生成</h1>
+<form id="form-upload-watermark" method="POST" enctype="multipart/form-data" action="{{ url_for('watermark.upload') }}">
+	<label for="display-name">検出時に表示したい名前</label><!--labelの囲いごと追加-->
+			<input type="text" id="display-name" name="display_name" required><br><!--id追加-->
+			<input type="file" name="image" accept=".jpg,.jpeg,.png" required>
+			<p class="annotation">対応ファイル形式：jpg/png</p>
+  <button type="submit">透かし生成</button>
+</form>
+{% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}
